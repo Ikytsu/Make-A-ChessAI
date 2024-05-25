@@ -1,0 +1,10 @@
+Arg_ERR = "Argument error"
+Specific_Arg_ERR_muchdebug = "two -debug were encountered, only one is authorized"
+Specific_Arg_ERR_muchuse = "two -usei or -usef were encountered, only one is authorized"
+Specific_Arg_ERR_nouse = "make sure to set -usei or -usef, this program is only for ai vs ai"
+Specific_Arg_ERR_muchstarter = "two -starter were encountered, only one is authorized"
+Specific_Arg_ERR_nothingafter = "no argument after a call, make sure to enter -arg arg"
+Specific_Arg_ERR_unknown = "unknown argument encountered, make sure to only enter known arguments by the trainer"
+
+File_ERR = "File error"
+Specific_File_ERR_unexstitent = "Your given ai, doesn't exists, try one that exists"
