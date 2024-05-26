@@ -1,6 +1,6 @@
 import chess.svg
 import sys
-sys.path.insert(1, '/home/ikytsu/Documents/GitHub/Chess-AI') ; import ai
+sys.path.insert(1, '/home/ikytsu/Documents/Chess-AI') ; import ai
 import output_names
 import os
 import chess.engine
@@ -117,13 +117,19 @@ else:
         if usef_used:
             board.push(find_best_move(board, 1))
         if usei_used:
-            result = engine.play(board, chess.engine.Limit(time=0.000001))
+            result = engine.play(board, chess.engine.Limit(time=0.5))
             board.push(result.move)
-        svg_board = chess.svg.board(board=board)
-
-        f = open("output/" + str(i), "w")
-        f.write(svg_board)
-        f.close()
+            svg_board = chess.svg.board(board=board)
+            f = open("output/" + str(i), "w")
+            f.write(svg_board)
+            f.close()
+            i += 1
+            result = engine.play(board, chess.engine.Limit(time=1))
+            board.push(result.move)
+            svg_board = chess.svg.board(board=board)
+            f = open("output/" + str(i), "w")
+            f.write(svg_board)
+            f.close()
 
         if debug: print("move", i)
     if debug: print("ended")
