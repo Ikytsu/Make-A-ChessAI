@@ -2,10 +2,11 @@
 import random
 import matplotlib.pyplot as plt
 from main import *
-
+sys.path.insert(1, '/home/ikytsu/Documents/Chess-AI') ; from ai import *
 
 n = 0
 Starter = ""
+white = None
 defined_depth = 3
 
 def Update(ax, LastPlayer):
@@ -56,6 +57,7 @@ def SubmitText(text, ax, textbox):
     global n
     global gameover
     global Starter
+    global white
 
     gameover = (board.is_checkmate() or board.is_stalemate() or board.is_insufficient_material() or board.can_claim_threefold_repetition())
     textbox.set_val("")
@@ -75,7 +77,7 @@ def SubmitText(text, ax, textbox):
             if n%2 == 0:
                 if Move(text) == True:
                     n += 1
-                    #C = get_best_move(board, defined_depth)
+                    C = get_best_move(board, defined_depth, white)
                     Move(str(C))
                     n += 1
                     Update(ax, False)
@@ -84,7 +86,7 @@ def SubmitText(text, ax, textbox):
             if n%2 != 0:
                 if Move(text) == True:
                     n += 1
-                    #C = get_best_move(board, defined_depth)
+                    C = get_best_move(board, defined_depth, white)
                     Move(str(C))
                     n += 1
                     Update(ax, False)
@@ -94,12 +96,14 @@ def SubmitText(text, ax, textbox):
 
         if text == "Player":
             Starter = "Player"
+            white = False
             DisplayAvalaibleMove(ax, False)
 
         elif text == "AI":
             Starter = "AI"
+            white = True
             DisplayAvalaibleMove(ax, True)
-            #C = get_best_move(board, defined_depth)
+            C = get_best_move(board, defined_depth, white)
             Move(str(C))
             n += 1
             Update(ax, False)

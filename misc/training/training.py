@@ -1,6 +1,6 @@
 import chess.svg
 import sys
-sys.path.insert(1, '/home/ikytsu/Documents/Chess-AI') ; import ai
+sys.path.insert(1, '/home/ikytsu/Documents/Chess-AI') ; from ai import *
 import output_names
 import os
 import chess.engine
@@ -114,11 +114,40 @@ else:
     f.close()
     while not board.is_checkmate() and not board.is_stalemate() and not board.is_insufficient_material() and not board.can_claim_threefold_repetition():
         i += 1
+        if debug: print("move", i)
         if usef_used:
-            board.push(find_best_move(board, 1))
+            if using_starter:
+                result = get_best_move(board, 3, using_starter)
+                board.push(result)
+                svg_board = chess.svg.board(board=board)
+                f = open("output/" + str(i), "w")
+                f.write(svg_board)
+                f.close()
+                i += 1
+                result = find_best_move(board, 3, not using_starter)
+                board.push(result)
+                svg_board = chess.svg.board(board=board)
+                f = open("output/" + str(i), "w")
+                f.write(svg_board)
+                f.close()
+            else:
+                result = find_best_move(board, 3, not using_starter)
+                board.push(result)
+                svg_board = chess.svg.board(board=board)
+                f = open("output/" + str(i), "w")
+                f.write(svg_board)
+                f.close()
+                i += 1
+                result = get_best_move(board, 3, using_starter)
+                board.push(result)
+                svg_board = chess.svg.board(board=board)
+                f = open("output/" + str(i), "w")
+                f.write(svg_board)
+                f.close()
+
         if usei_used:
-            result = engine.play(board, chess.engine.Limit(time=0.5))
-            board.push(result.move)
+            result = get_best_move(board, 3, using_starter)
+            board.push(result)
             svg_board = chess.svg.board(board=board)
             f = open("output/" + str(i), "w")
             f.write(svg_board)
@@ -130,7 +159,6 @@ else:
             f = open("output/" + str(i), "w")
             f.write(svg_board)
             f.close()
-
         if debug: print("move", i)
     if debug: print("ended")
-    engine.quit()
+    if usei_used: engine.quit()
