@@ -147,6 +147,7 @@ else:
 
         if usei_used:
             result = get_best_move(board, 3, using_starter)
+            print(result)
             board.push(result)
             svg_board = chess.svg.board(board=board)
             f = open("output/" + str(i), "w")

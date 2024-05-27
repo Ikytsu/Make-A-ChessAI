@@ -64,12 +64,11 @@ def minmax(board, maximizing_player, depth, alpha, beta, white:bool):
 
 def get_best_move(board, depth, white:bool):
     best_eval = float('-inf')
-    bestmove = None
     for move in board.legal_moves:
         board_for_minmax = board.copy()
         board_for_minmax.push(move)
         eval = minmax(board_for_minmax, False, depth - 1, float('-inf'), float('inf'), white)
-        if eval > best_eval:
+        if eval >= best_eval:
             bestmove = move
             best_eval = eval
     return bestmove
