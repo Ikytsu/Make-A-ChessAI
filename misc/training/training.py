@@ -1,6 +1,5 @@
 import chess.svg
 import sys
-sys.path.insert(1, 'path to parent directory (Make-A-ChessAI)') ; from ai import *
 import output_names
 import os
 import chess.engine
@@ -118,13 +117,16 @@ else:
         if usef_used:
             if using_starter:
                 result = get_best_move(board, 3, using_starter)
+                if debug: print(result)
                 board.push(result)
                 svg_board = chess.svg.board(board=board)
                 f = open("output/" + str(i), "w")
                 f.write(svg_board)
                 f.close()
                 i += 1
+                if debug: print("move", i)
                 result = find_best_move(board, 3, not using_starter)
+                if debug: print(result)
                 board.push(result)
                 svg_board = chess.svg.board(board=board)
                 f = open("output/" + str(i), "w")
@@ -132,13 +134,16 @@ else:
                 f.close()
             else:
                 result = find_best_move(board, 3, not using_starter)
+                if debug: print(result)
                 board.push(result)
                 svg_board = chess.svg.board(board=board)
                 f = open("output/" + str(i), "w")
                 f.write(svg_board)
                 f.close()
                 i += 1
+                if debug: print("move", i)
                 result = get_best_move(board, 3, using_starter)
+                if debug: print(result)
                 board.push(result)
                 svg_board = chess.svg.board(board=board)
                 f = open("output/" + str(i), "w")
@@ -155,27 +160,30 @@ else:
                 f.write(svg_board)
                 f.close()
                 i += 1
-                result = engine.play(board)
+                if debug: print("move", i)
+                result = engine.play(board, chess.engine.Limit(time=1))
+                if debug: print(result)
                 board.push(result.move)
                 svg_board = chess.svg.board(board=board)
                 f = open("output/" + str(i), "w")
                 f.write(svg_board)
                 f.close()
             else:
-                result = engine.play(board)
+                result = engine.play(board, chess.engine.Limit(time=1))
+                if debug: print(result)
                 board.push(result.move)
                 svg_board = chess.svg.board(board=board)
                 f = open("output/" + str(i), "w")
                 f.write(svg_board)
                 f.close()
                 i += 1
+                if debug: print("move", i)
                 result = get_best_move(board, 3, using_starter)
-                print(result)
+                if debug: print(result)
                 board.push(result)
                 svg_board = chess.svg.board(board=board)
                 f = open("output/" + str(i), "w")
                 f.write(svg_board)
                 f.close()
-        if debug: print("move", i)
     if debug: print("ended")
     if usei_used: engine.quit()
