@@ -154,7 +154,7 @@ else:
             f.write(svg_board)
             f.close()
             i += 1
-            result = engine.play(board, chess.engine.Limit(time=1))
+            result = engine.play(board)
             board.push(result.move)
             svg_board = chess.svg.board(board=board)
             f = open("output/" + str(i), "w")
