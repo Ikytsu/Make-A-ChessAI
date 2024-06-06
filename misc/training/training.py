@@ -1,6 +1,6 @@
 import chess.svg
 import sys
-sys.path.insert(1, '/home/ikytsu/Documents/Chess-AI') ; from ai import *
+sys.path.insert(1, 'path to parent directory (Make-A-ChessAI)') ; from ai import *
 import output_names
 import os
 import chess.engine

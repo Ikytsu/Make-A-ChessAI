@@ -2,7 +2,7 @@
 import random
 import matplotlib.pyplot as plt
 from main import *
-sys.path.insert(1, '/home/ikytsu/Documents/Chess-AI') ; from ai import *
+sys.path.insert(1, 'path to parent directory (Make-A-ChessAI)') ; from ai import *
 
 n = 0
 Starter = ""
